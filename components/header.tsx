@@ -1,13 +1,22 @@
 import { NavLink, NavLinks } from "@/constant";
 import { logo } from "@/public/icons";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { Sidebar } from "./sidebar";
+import { AnimatePresence, motion, Variants } from "framer-motion";
+import Image from "next/image";
 import { AlignRight, Search, X } from "lucide-react";
 
-const Header = () => {
-  const [openMenu, setOpenMenu] = useState<boolean>(false);
+interface SidebarProps {
+  initialIsOpen?: boolean;
+}
+
+const Header = ({ initialIsOpen = false }: SidebarProps) => {
+  const [openMenu, setOpenMenu] = useState<boolean>(initialIsOpen);
+
+  const variants: Variants = {
+    open: { opacity: 1, x: 0 },
+    closed: { opacity: 0, x: "100%" },
+  };
 
   return (
     <nav className="w-full h-[5rem] flex items-center justify-between px-3 md:px-8">
@@ -36,20 +45,40 @@ const Header = () => {
       {/* Menu Nav For Mobile Device */}
       <div className="mx-4 block md:hidden ">
         <button
-          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-            e.preventDefault();
-            setOpenMenu((prev: boolean) => !prev);
+          onClick={() => {
+            setOpenMenu(!openMenu);
           }}
-          className="fixed right-5 top-5 rounded-full hover:bg-neutral-100 p-2"
+          className=" rounded-full hover:bg-neutral-100 p-2"
         >
           {openMenu ? (
-            <X size={25} strokeWidth={2} />
+            <X color="#000" size={25} strokeWidth={2} />
           ) : (
-            <AlignRight size={25} strokeWidth={2} />
+            <AlignRight color="#000" size={25} strokeWidth={2} />
           )}
         </button>
+        <AnimatePresence>
+          {openMenu && (
+            <motion.div
+              animate={openMenu ? "open" : "closed"}
+              variants={variants}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="fixed left-0 bottom-0 text-white p-5
+      md:hidden top-20 right-0 bg-amber-600 w-full h-screen py-10 font-poppins"
+            >
+              <div className="flex flex-col text-3xl ml-2 gap-8 font-thin items-start">
+                {NavLinks.map((link: NavLink, index: number) => (
+                  <li
+                    key={index}
+                    className="hover:underline hover:underline-offset-4"
+                  >
+                    <Link href={link.href}>{link.name}</Link>
+                  </li>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-      {openMenu && <Sidebar initialIsOpen={true} />}
     </nav>
   );
 };
