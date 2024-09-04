@@ -19,6 +19,9 @@ const config = {
       },
     },
     extend: {
+      colors: {
+        coffee: "#6f4e37",
+      },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         poppins: ["Poppins", "sans-serif"],

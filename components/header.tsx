@@ -42,8 +42,8 @@ const Header = ({ initialIsOpen = false }: SidebarProps) => {
           <Search size={25} strokeWidth={2} />
         </button>
       </div>
-      {/* Menu Nav For Mobile Device */}
-      <div className="mx-4 block md:hidden ">
+      {/* Menu Sidebar Nav For Mobile Device */}
+      <div className="mx-4 block md:hidden">
         <button
           onClick={() => {
             setOpenMenu(!openMenu);
@@ -59,11 +59,13 @@ const Header = ({ initialIsOpen = false }: SidebarProps) => {
         <AnimatePresence>
           {openMenu && (
             <motion.div
-              animate={openMenu ? "open" : "closed"}
+              initial="closed"
+              animate="open"
+              exit="closed"
               variants={variants}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="fixed left-0 bottom-0 text-white p-5
-      md:hidden top-20 right-0 bg-amber-600 w-full h-screen py-10 font-poppins"
+              className="fixed left-0 bottom-0 text-white p-5 z-50
+                md:hidden top-20 right-0 bg-amber-600 w-full h-screen py-10 font-poppins"
             >
               <div className="flex flex-col text-3xl ml-2 gap-8 font-thin items-start">
                 {NavLinks.map((link: NavLink, index: number) => (
