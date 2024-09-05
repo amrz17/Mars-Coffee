@@ -1,4 +1,4 @@
-import { coffeCup, hero, indonesia } from "@/public/images";
+import { coffeCup, hero } from "@/public/images";
 import { CircleArrowRight } from "lucide-react";
 import Image from "next/image";
 import { Button } from "./ui/button";
@@ -37,7 +37,7 @@ const Hero = () => {
             hover:gap-4 z-20 hover:bg-coffee hover:text-white"
           >
             EXPLORE THE TASTE
-            <CircleArrowRight />
+            <CircleArrowRight strokeWidth={1} />
           </Button>
         </div>
         <div className="hidden md:flex hover:rotate-3 z-40 2xl:pr-20 mb-8">
