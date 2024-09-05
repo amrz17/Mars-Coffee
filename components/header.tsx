@@ -4,7 +4,8 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import Image from "next/image";
-import { AlignRight, Search, X } from "lucide-react";
+import { AlignRight, X } from "lucide-react";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 interface SidebarProps {
   initialIsOpen?: boolean;
@@ -38,9 +39,19 @@ const Header = ({ initialIsOpen = false }: SidebarProps) => {
         ))}
       </div>
       <div className="hidden md:block">
-        <button className="rounded-full hover:bg-neutral-100 p-2">
-          <Search size={25} strokeWidth={2} />
-        </button>
+        <SignedOut>
+          <SignInButton>
+            <button
+              className="font-poppins text-sm font-normal hover:underline 
+              hover:underline-offset-4"
+            >
+              LOGIN
+            </button>
+          </SignInButton>
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
       </div>
       {/* Menu Sidebar Nav For Mobile Device */}
       <div className="mx-4 block md:hidden">
