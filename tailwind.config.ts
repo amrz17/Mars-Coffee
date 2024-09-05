@@ -21,6 +21,10 @@ const config = {
     extend: {
       colors: {
         coffee: "#6f4e37",
+        espreso: "#273240",
+        capucino: "#F5556E",
+        americano: "#40B2C9",
+        gray: "#121212",
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
