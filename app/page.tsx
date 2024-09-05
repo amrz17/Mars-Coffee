@@ -6,6 +6,7 @@ import { increment, decrement } from "@/redux/features/counter/counterSlice";
 import { AppDispatch, useAppSelector } from "../redux/store";
 import Header from "@/components/header";
 import Hero from "@/components/hero";
+import Trending from "@/components/trending";
 
 export default function Home() {
   const count = useAppSelector((state) => state.counter.value);
@@ -16,6 +17,7 @@ export default function Home() {
       <Header />
       <main className="flex min-h-screen flex-col items-center justify-between">
         <Hero />
+        <Trending />
         {/*
         <div>
           <h1 className="text-center">Coffee Shop</h1>
